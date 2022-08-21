@@ -1,0 +1,57 @@
+<ul>
+    <li *ngFor="let statusHistory of ticket?.ticketStatusHistories">
+        <span>
+
+            <span *ngIf="statusHistory.status == TicketStatus.Opened">
+                The ticket #{{ticket.id}}
+                <span class="badge badge-primary">Opened</span>
+                by
+                <span class="badge badge-default">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    {{ticket.fullName}}
+                </span>
+            </span>
+
+            <span *ngIf="statusHistory.status == TicketStatus.InProgress">
+                The ticket #{{ticket.id}}
+                change to
+                <span class="badge badge-info">In Progress</span>
+                by
+                <span class="badge badge-default">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    Admin
+                </span>
+            </span>
+
+            <span *ngIf="statusHistory.status == TicketStatus.Resolved">
+                The ticket #{{ticket.id}}
+                change to
+                <span class="badge badge-success">Resolved</span>
+                by
+                <span class="badge badge-default">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    Admin
+                </span>
+            </span>
+
+            <span>
+                on
+                <span class="badge badge-default">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                    {{statusHistory.dateTime | date:'mediumDate'}}
+                </span>
+                at
+                <span class="badge badge-default">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    {{statusHistory.dateTime | date:'mediumTime'}}
+                </span>
+            </span>
+
+        </span>
+    </li>
+    <li *ngIf="ticket?.status == TicketStatus.Resolved">
+        <span>
+            <span>The ticket #{{ticket.id}} closed.</span>
+        </span>
+    </li>
+</ul>

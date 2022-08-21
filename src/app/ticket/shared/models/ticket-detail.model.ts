@@ -12,9 +12,11 @@ export class TicketDetailModel {
     createdOn: string;
     status: TicketStatus;
 
-    ticketStatusHistories: TicketStatusHistoryModel[] = []
+    ticketStatusHistories: TicketStatusHistoryModel[];
 
     constructor(args: any) {
+
+        this.ticketStatusHistories = [];
 
         if (args == null) return;
 
@@ -27,5 +29,9 @@ export class TicketDetailModel {
         this.createdOn = args.createdOn;
         this.status = args.status;
         this.ticketStatusHistories = args.ticketStatusHistories.map((res: any) => new TicketStatusHistoryModel(res));
+    }
+
+    get fullName(): string {
+        return `${this.firstName} ${this.lastName}`
     }
 }

@@ -3,7 +3,7 @@ import { TicketStatus } from "src/app/shared/enums/ticket-status.enum";
 export class TicketStatusHistoryModel {
 
     id: number;
-    dateTime: string;
+    dateTime: Date;
     status: TicketStatus;
 
     constructor(args: any) {
@@ -11,7 +11,7 @@ export class TicketStatusHistoryModel {
         if (args == null) return;
 
         this.id = args.id;
-        this.dateTime = args.dateTime;
+        this.dateTime = new Date(args.dateTime);
         this.status = args.status;
 
     }

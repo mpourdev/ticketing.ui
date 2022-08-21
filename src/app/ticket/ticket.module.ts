@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TicketService } from './shared/services/ticket.service';
 import { PaginationModule } from '../shared/components/pagination/pagination.module';
 import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
+import { TicketStatusHistoryComponent } from './ticket-status-history/ticket-status-history.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
     TicketComponent,
     TicketListComponent,
     TicketFormComponent,
-    TicketDetailComponent
+    TicketDetailComponent,
+    TicketStatusHistoryComponent
   ],
   imports: [
     CommonModule,
