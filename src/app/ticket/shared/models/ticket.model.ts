@@ -8,7 +8,7 @@ export class TicketModel {
     email: string;
     subject: string;
     message: string;
-    createdOn: string;
+    createdOn: Date;
     status: TicketStatus;
 
     constructor(args: any) {
@@ -21,7 +21,7 @@ export class TicketModel {
         this.email = args.email;
         this.subject = args.subject;
         this.message = args.message;
-        this.createdOn = args.createdOn;
+        this.createdOn = new Date(args.createdOn);
         this.status = args.status;
 
     }

@@ -1,0 +1,48 @@
+.pagination {
+    text-align: center;
+}
+
+.pagination .btn-icon {
+    display: inline-block;
+    margin: 0 8px;
+    border: 1px solid transparent;
+}
+
+.pagination .btn-icon:first-child {
+    padding: 2px 9px 0px 11px;
+}
+
+.pagination .btn-icon:last-child {
+    padding: 2px 11px 0px 10px;
+}
+
+.pagination .btn-link {
+    display: inline-block;
+    margin: 0 8px;
+    font-size: 12px;
+    color: #2b2b46;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 2px 9px;
+}
+
+.pagination .btn-icon:hover,
+.pagination .btn-link:hover,
+.pagination .btn-link.active {
+    color: #d7b248;
+    border-color: #d7b248;
+}
+
+.pagination .btn-link.active {
+    cursor: default;
+}
+
+.pagination .btn-icon:disabled {
+    background-color: #fff;
+    cursor: default;
+    border: 1px solid transparent;
+}
+
+.pagination .btn-icon:disabled svg path {
+    fill: rgb(165, 165, 165) !important;
+}
