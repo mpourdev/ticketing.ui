@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { BaseListComponent } from 'src/app/core/base/base-list.component';
+import { TicketStatus } from 'src/app/shared/enums/ticket-status.enum';
 import { TicketModel } from '../shared/models/ticket.model';
 import { TicketService } from '../shared/services/ticket.service';
 
@@ -12,6 +13,7 @@ import { TicketService } from '../shared/services/ticket.service';
 })
 export class TicketListComponent extends BaseListComponent implements OnInit {
 
+  TicketStatus = TicketStatus;
   tickets: TicketModel[];
 
   constructor(

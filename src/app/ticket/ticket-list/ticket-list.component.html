@@ -3,7 +3,7 @@
         <span>
             Ticket List
         </span>
-        <a [routerLink]="['/ticket/form','new']" class="btn btn-sm btn-success float-right">
+        <a [routerLink]="['/ticket/add']" class="btn btn-sm btn-success float-right">
             <i class="fa fa-plus mr-1" aria-hidden="true"></i>
             Add Ticket
         </a>
@@ -12,26 +12,40 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col" class="text-center">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Email</th>
                     <th scope="col">Subject</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Created On</th>
-                    <!-- <th scope="col">&nbsp;</th> -->
+                    <th scope="col">&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let ticket of tickets">
-                    <th scope="row">{{ticket.id}}</th>
-                    <td>{{ticket.firstName}} {{ticket.lastName}}</td>
-                    <td>{{ticket.email}}</td>
+                    <th scope="row" class="text-center" style="min-width: 50px;">{{ticket.id}}</th>
+                    <td>{{ticket.firstName}}<br>{{ticket.lastName}}</td>
                     <td>{{ticket.subject}}</td>
-                    <td>{{ticket.createdOn | date:'short'}}</td>
-                    <!-- <td>
-                        <a>
-                            <i class="fa fa-plus" aria-hidden="true"></i>
+                    <td>
+                        <span class="badge badge-primary" *ngIf="ticket.status == TicketStatus.Opened">
+                            Opened
+                        </span>
+                        <span class="badge badge-info" *ngIf="ticket.status == TicketStatus.InProgress">
+                            In Progress
+                        </span>
+                        <span class="badge badge-success" *ngIf="ticket.status == TicketStatus.Resolved">
+                            Resolved
+                        </span>
+                    </td>
+                    <td class="text-center" style="min-width: 110px;">
+                        {{ticket.createdOn | date:'shortDate'}}
+                        <br>
+                        {{ticket.createdOn | date:'shortTime'}}
+                    </td>
+                    <td class="text-center" style="width: 70px;">
+                        <a class="cursor-pointer" [routerLink]="['/ticket/detail', ticket.id]">
+                            <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
                         </a>
-                    </td> -->
+                    </td>
                 </tr>
             </tbody>
         </table>

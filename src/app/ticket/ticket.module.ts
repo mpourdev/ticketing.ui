@@ -8,13 +8,15 @@ import { TicketFormComponent } from './ticket-form/ticket-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TicketService } from './shared/services/ticket.service';
 import { PaginationModule } from '../shared/components/pagination/pagination.module';
+import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
 
 
 @NgModule({
   declarations: [
     TicketComponent,
     TicketListComponent,
-    TicketFormComponent
+    TicketFormComponent,
+    TicketDetailComponent
   ],
   imports: [
     CommonModule,

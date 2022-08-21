@@ -43,6 +43,7 @@ export class TicketFormComponent extends BaseComponent implements OnInit {
           this.router.navigate(['ticket/list']);
         });
     }
+
   }
 
 }

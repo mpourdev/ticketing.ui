@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
 import { TicketFormComponent } from './ticket-form/ticket-form.component';
 import { TicketListComponent } from './ticket-list/ticket-list.component';
 import { TicketComponent } from './ticket.component';
@@ -19,9 +20,13 @@ const routes: Routes = [
         component: TicketListComponent
       },
       {
-        path: 'form/:id',
+        path: 'add',
         component: TicketFormComponent
       },
+      {
+        path: 'detail/:id',
+        component: TicketDetailComponent
+      }
     ]
   }
 ];
