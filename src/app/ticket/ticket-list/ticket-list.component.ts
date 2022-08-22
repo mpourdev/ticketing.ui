@@ -11,7 +11,7 @@ import { TicketService } from '../shared/services/ticket.service';
   templateUrl: './ticket-list.component.html',
   styleUrls: ['./ticket-list.component.css']
 })
-export class TicketListComponent extends BaseListComponent implements OnInit {
+export class TicketListComponent extends BaseListComponent {
 
   TicketStatus = TicketStatus;
   tickets: TicketModel[];
@@ -22,10 +22,6 @@ export class TicketListComponent extends BaseListComponent implements OnInit {
     protected route: ActivatedRoute
   ) {
     super(router, route);
-  }
-
-  ngOnInit(): void {
-    this.read();
   }
 
   read() {

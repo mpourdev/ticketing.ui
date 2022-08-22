@@ -4,6 +4,10 @@ import { TicketDetailModel } from "../models/ticket-detail.model";
 import { HttpClient } from "@angular/common/http";
 import { BaseService } from "src/app/core/base/base.service";
 import { ToastrService } from "ngx-toastr";
+import { CreateTicketModel } from "../models/create-ticket.model";
+import { ChangeTicketContentModel } from "../models/change-ticket-content.model";
+import { ChangeTicketContentValidator } from "../validators/change-ticket-content.validator";
+import { CreateTicketValidator } from "../validators/create-ticket.validator";
 
 @Injectable()
 export class TicketService extends BaseService {
@@ -31,16 +35,22 @@ export class TicketService extends BaseService {
             );
     }
 
-    public post(data: any) {
-        return this.httpClient.post(`${this.baseUrl}/Create`, data)
+    public post(createTicket: CreateTicketModel,) {
+
+        this.checkValidationAndThrowError(CreateTicketValidator, createTicket);
+
+        return this.httpClient.post(`${this.baseUrl}/Create`, createTicket)
             .pipe(
                 this.showSuccessMsg(),
                 this.handleError()
             );
     }
 
-    public put(data: any) {
-        return this.httpClient.put(`${this.baseUrl}/ChangeContent`, data)
+    public put(changeContent: ChangeTicketContentModel) {
+
+        this.checkValidationAndThrowError(ChangeTicketContentValidator, changeContent);
+
+        return this.httpClient.put(`${this.baseUrl}/ChangeContent`, changeContent)
             .pipe(
                 this.showSuccessMsg(),
                 this.handleError()
@@ -48,7 +58,11 @@ export class TicketService extends BaseService {
     }
 
     public changeToInProgress(id: number) {
-        return this.httpClient.put(`${this.baseUrl}/ChangeToInProgress/${id}`, null)
+
+        if (id <= 0)
+            throw new Error('The id must be greater than 0.');
+
+        return this.httpClient.patch(`${this.baseUrl}/ChangeToInProgress/${id}`, null)
             .pipe(
                 this.showSuccessMsg(),
                 this.handleError()
@@ -56,7 +70,11 @@ export class TicketService extends BaseService {
     }
 
     public changeToResolved(id: number) {
-        return this.httpClient.put(`${this.baseUrl}/ChangeToResolved/${id}`, null)
+
+        if (id <= 0)
+            throw new Error('The id must be greater than 0.');
+
+        return this.httpClient.patch(`${this.baseUrl}/ChangeToResolved/${id}`, null)
             .pipe(
                 this.showSuccessMsg(),
                 this.handleError()

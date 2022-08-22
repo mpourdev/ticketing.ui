@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { BaseComponent } from 'src/app/core/base/base.component';
 import { TicketStatus } from 'src/app/shared/enums/ticket-status.enum';
 import { formValidator } from 'src/app/shared/utilities/form.utility';
+import { ChangeTicketContentModel } from '../shared/models/change-ticket-content.model';
 import { TicketDetailModel } from '../shared/models/ticket-detail.model';
 import { TicketService } from '../shared/services/ticket.service';
 
@@ -84,8 +85,9 @@ export class TicketDetailComponent extends BaseComponent implements OnInit {
 
       let formData = this.ticketForm.getRawValue();
       formData.id = this.ticketId;
+      const changeTicketContent = new ChangeTicketContentModel(formData);
 
-      this.ticketService.put(formData)
+      this.ticketService.put(changeTicketContent)
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe(() => {
           this.router.navigate(['ticket/list']);

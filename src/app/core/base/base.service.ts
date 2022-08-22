@@ -4,6 +4,7 @@ import { catchError, tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { StatusCodes } from "../constants/app.const";
 import { ToastrService } from "ngx-toastr";
+import { SyncValidator } from "fluentvalidation-ts/dist/CoreValidator";
 
 export abstract class BaseService {
 
@@ -41,6 +42,18 @@ export abstract class BaseService {
                 case StatusCodes.InternalServerError:
                     this.toastrService.error(this.errorMsg, 'Error!');
                     break;
+                case StatusCodes.BadRequest:
+                    if (err.error.errors) {
+                        let errors = Object.keys(err.error.errors).map(key => err.error.errors[key]);
+                        errors.forEach(err => this.toastrService.error(err, 'Error!'));
+                    }
+                    else {
+                        this.toastrService.error(err.error, 'Error!');
+                    }
+                    break;
+                default:
+                    this.toastrService.error(err.error, 'Error!');
+                    break;
             }
 
             return throwError(err);
@@ -50,6 +63,18 @@ export abstract class BaseService {
 
     protected showSuccessMsg(): MonoTypeOperatorFunction<unknown> {
         return tap(() => this.toastrService.success(this.successMsg))
+    }
+
+    checkValidationAndThrowError<TModel>(validatorType: { new(): SyncValidator<TModel> }, model: TModel) {
+        const validator = new validatorType();
+        let validationErrors: any = validator.validate(model);
+
+        if (Object.keys(validationErrors).length) {
+            let errors = Object.keys(validationErrors).map(key => validationErrors[key]);
+            errors.forEach(err => this.toastrService.error(err, 'Validation Error!'));
+            console.error(validationErrors);
+            throw new Error('Validation Error');
+        }
     }
 
 }

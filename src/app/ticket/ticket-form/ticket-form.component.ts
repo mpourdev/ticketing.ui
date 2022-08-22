@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { BaseComponent } from 'src/app/core/base/base.component';
 import { formValidator } from 'src/app/shared/utilities/form.utility';
+import { CreateTicketModel } from '../shared/models/create-ticket.model';
 import { TicketService } from '../shared/services/ticket.service';
 
 @Component({
@@ -35,13 +36,15 @@ export class TicketFormComponent extends BaseComponent implements OnInit {
 
     if (formValidator(this.ticketForm)) {
 
-      let formData = this.ticketForm.getRawValue();
+      const formData = this.ticketForm.getRawValue();
+      const createTicket = new CreateTicketModel(formData);
 
-      this.ticketService.post(formData)
+      this.ticketService.post(createTicket)
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe(() => {
           this.router.navigate(['ticket/list']);
         });
+
     }
 
   }

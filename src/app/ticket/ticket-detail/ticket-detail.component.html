@@ -54,7 +54,7 @@
                     style="min-height: 158px;" maxlength="1000"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary mr-2" (click)="edit()"
+            <button type="submit" class="btn btn-primary mr-2" (click)="edit()" [disabled]="!ticketForm.dirty"
                 *ngIf="ticket.status == TicketStatus.Opened">
                 <i class="fa fa-pencil-square-o mr-1" aria-hidden="true"></i>
                 Edit
