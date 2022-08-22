@@ -7,7 +7,7 @@ COPY package*.json /app/
 RUN npm install
 COPY . /app
 
-RUN npm run build -- --outputPath=./dist/out --configuration production
+RUN npm run build --outputPath=./dist/out --configuration production
 
 
 # Stage 2, use the compiled app, ready for production with Nginx
