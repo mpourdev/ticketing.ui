@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+
+  loanet:
+    container_name: ticketing-ui
+    image: ticketing/ticketing-ui
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - '80:80'
+    networks:
+      - ticketing-network
+
+networks:
+  ticketing-network:
+    name: ticketing-net
